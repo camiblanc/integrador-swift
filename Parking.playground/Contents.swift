@@ -27,6 +27,16 @@ struct Parking {
         
         onFinish(true)
     }
+    
+    mutating func checkoutVehicle(_ plate: String, onSuccess: (_: Int) -> Void, onError: () -> Void) -> Void {
+        guard let vehicle = vehicles.first(where: { $0.plate == plate }) else {
+            onError()
+            return
+        }
+        
+        vehicles.remove(vehicle)
+        onSuccess(55)
+    }
 }
 
 struct Vehicle: Parkable, Hashable {
@@ -154,3 +164,6 @@ let vehicles = [ vehicle1, vehicle2, vehicle3, vehicle4, vehicle5, vehicle6, veh
 vehicles.forEach { vehicle in
     alkeParking.checkInVehicle(vehicle, onFinish: greeting)
 }
+
+//test ej 7
+alkeParking.checkoutVehicle("CC333QY", onSuccess: {number in print(number)}, onError: {print("error")})
