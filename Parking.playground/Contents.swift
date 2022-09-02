@@ -91,7 +91,7 @@ print(alkeParking.vehicles.insert(car2).inserted)  // false
 */
 
 // Test ejercicio 5
-/*
+
 var alkeParking = Parking()
 let vehicle1 = Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: Date(), discountCard: "DISCOUNT_CARD_001")
 let vehicle2 = Vehicle(plate: "B222BBB", type: VehicleType.motorcycle, checkInTime: Date(), discountCard: nil)
@@ -108,13 +108,13 @@ let vehicle12 = Vehicle(plate: "DD444GG", type: VehicleType.bus, checkInTime: Da
 let vehicle13 = Vehicle(plate: "AA111DD", type: VehicleType.car, checkInTime: Date(), discountCard: "DISCOUNT_CARD_007")
 let vehicle14 = Vehicle(plate: "B222EEE", type: VehicleType.motorcycle, checkInTime: Date(), discountCard: nil)
 let vehicle15 = Vehicle(plate: "CC333FF", type: VehicleType.miniBus, checkInTime: Date(), discountCard: nil)
-
+/*
 let vehicle15bis = Vehicle(plate: "CC333FF", type: VehicleType.miniBus, checkInTime: Date(), discountCard: "any")
-
+*/
 let greeting = { boolean in
     boolean ? print("Welcome to AlkeParking!") : print("Sorry, the check-in failed")
 }
-
+/*
 alkeParking.checkInVehicle(vehicle1, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle2, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle3, onFinish: greeting)
@@ -132,14 +132,14 @@ alkeParking.checkInVehicle(vehicle14, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle15, onFinish: greeting)
 
 alkeParking.checkInVehicle(vehicle15bis, onFinish: greeting) //duplicated
-
+*/
 let vehicle16 = Vehicle(plate: "CC333QW", type: VehicleType.miniBus, checkInTime: Date(), discountCard: nil)
 let vehicle17 = Vehicle(plate: "DD444QE", type: VehicleType.bus, checkInTime: Date(), discountCard: "DISCOUNT_CARD_008")
 let vehicle18 = Vehicle(plate: "AA111QR", type: VehicleType.car, checkInTime: Date(), discountCard: "DISCOUNT_CARD_009")
 let vehicle19 = Vehicle(plate: "BB22QT", type: VehicleType.motorcycle, checkInTime: Date(), discountCard: nil)
 let vehicle20 = Vehicle(plate: "CC333QY", type: VehicleType.miniBus, checkInTime: Date(), discountCard: nil)
 let vehicle21 = Vehicle(plate: "CC333QO", type: VehicleType.miniBus, checkInTime: Date(), discountCard: nil)
-
+/*
 alkeParking.checkInVehicle(vehicle16, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle17, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle18, onFinish: greeting)
@@ -149,3 +149,8 @@ alkeParking.checkInVehicle(vehicle20, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle21, onFinish: greeting) //full
 */
 
+let vehicles = [ vehicle1, vehicle2, vehicle3, vehicle4, vehicle5, vehicle6, vehicle7,vehicle8,vehicle9,vehicle10,vehicle11,vehicle12,vehicle13,vehicle14,vehicle15,vehicle16,vehicle17,vehicle18,vehicle19,vehicle20,vehicle21]
+
+vehicles.forEach { vehicle in
+    alkeParking.checkInVehicle(vehicle, onFinish: greeting)
+}
