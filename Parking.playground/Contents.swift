@@ -57,6 +57,12 @@ struct Parking {
     func getAdminData() {
         print("\(totals.vehiclesCount) vehicles have checked out and have earnings of $\(totals.earnings)")
     }
+    
+    func listVehicles() {
+        vehicles.forEach({v in
+            print("Vehicle plate: \(v.plate)")
+        })
+    }
 }
 
 struct Vehicle: Parkable, Hashable {
@@ -189,3 +195,5 @@ vehicles.forEach { vehicle in
 alkeParking.checkoutVehicle("CC333QY", onSuccess: {number in print("Your fee is \(number). Come back soon")}, onError: {print("Sorry, the check-out failed")})
 
 alkeParking.getAdminData()
+
+alkeParking.listVehicles()
