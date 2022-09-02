@@ -12,9 +12,9 @@ struct Parking {
     
     let maxVehicles = 20
     var vehicles: Set<Vehicle> = [] //avoids duplicated vehicles
-    //var totals: (vehiclesCount: Int, earnings: Int)
+    var totals: (vehiclesCount: Int, earnings: Int) = (vehiclesCount: 0, earnings: 0)
     
-    mutating func checkInVehicle(_ vehicle: Vehicle, onFinish: (Bool) -> Void) {
+    mutating func checkInVehicle(_ vehicle: Vehicle, onFinish: (Bool) -> Void) -> Void {
         guard vehicles.count < 20 else {
             onFinish(false)
             return
@@ -35,20 +35,27 @@ struct Parking {
         }
         
         vehicles.remove(vehicle)
-        let amount = calculateFee(vehicle.type, parkedTime: vehicle.parkedTime, hasDiscount: vehicle.discountCard )
+        let hasDiscount = vehicle.discountCard != nil ? true : false
+        let amount = calculateFee(vehicle.type, parkedTime: vehicle.parkedTime, hasDiscountCard: hasDiscount )
         onSuccess(amount)
     }
     
-    func calculateFee(_ type: VehicleType, parkedTime: Int, hasDiscount: String? ) -> Int {
+    mutating func calculateFee(_ type: VehicleType, parkedTime: Int, hasDiscountCard: Bool ) -> Int {
         var result = type.tarifa
         if ( parkedTime > 120 ) {
             let extras = parkedTime - 120
             result += Int(ceil(Double(extras) / 15.0)) * 5
         }
-        if hasDiscount != nil {
+        if hasDiscountCard {
             result = Int((Double(result) * 15) / 100)
         }
+        totals.vehiclesCount += 1
+        totals.earnings += result
         return result
+    }
+    
+    func getAdminData() {
+        print("\(totals.vehiclesCount) vehicles have checked out and have earnings of $\(totals.earnings)")
     }
 }
 
@@ -179,4 +186,6 @@ vehicles.forEach { vehicle in
 }
 
 //test ej 7
-alkeParking.checkoutVehicle("CC333QY", onSuccess: {number in print(number)}, onError: {print("error")})
+alkeParking.checkoutVehicle("CC333QY", onSuccess: {number in print("Your fee is \(number). Come back soon")}, onError: {print("Sorry, the check-out failed")})
+
+alkeParking.getAdminData()
