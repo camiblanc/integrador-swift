@@ -92,8 +92,6 @@ print(alkeParking.vehicles.insert(car2).inserted)  // false
 
 // Test ejercicio 5
 /*
-*/
-
 var alkeParking = Parking()
 let vehicle1 = Vehicle(plate: "AA111AA", type: VehicleType.car, checkInTime: Date(), discountCard: "DISCOUNT_CARD_001")
 let vehicle2 = Vehicle(plate: "B222BBB", type: VehicleType.motorcycle, checkInTime: Date(), discountCard: nil)
@@ -149,5 +147,5 @@ alkeParking.checkInVehicle(vehicle19, onFinish: greeting)
 alkeParking.checkInVehicle(vehicle20, onFinish: greeting)
 
 alkeParking.checkInVehicle(vehicle21, onFinish: greeting) //full
-
+*/
 
