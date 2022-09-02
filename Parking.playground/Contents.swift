@@ -35,7 +35,20 @@ struct Parking {
         }
         
         vehicles.remove(vehicle)
-        onSuccess(55)
+        let amount = calculateFee(vehicle.type, parkedTime: vehicle.parkedTime, hasDiscount: vehicle.discountCard )
+        onSuccess(amount)
+    }
+    
+    func calculateFee(_ type: VehicleType, parkedTime: Int, hasDiscount: String? ) -> Int {
+        var result = type.tarifa
+        if ( parkedTime > 120 ) {
+            let extras = parkedTime - 120
+            result += Int(ceil(Double(extras) / 15.0)) * 5
+        }
+        if hasDiscount != nil {
+            result = Int((Double(result) * 15) / 100)
+        }
+        return result
     }
 }
 
