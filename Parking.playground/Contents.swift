@@ -10,9 +10,9 @@ protocol Parkable {
 
 struct Parking {
     
-    let maxVehicles = 20
-    var vehicles: Set<Vehicle> = [] //avoids duplicated vehicles
-    var totals: (vehiclesCount: Int, earnings: Int) = (vehiclesCount: 0, earnings: 0)
+    private let maxVehicles = 20
+    private (set) var vehicles: Set<Vehicle> = [] //avoids duplicated vehicles
+    private var totals: (vehiclesCount: Int, earnings: Int) = (vehiclesCount: 0, earnings: 0)
     
     mutating func checkInVehicle(_ vehicle: Vehicle, onFinish: (Bool) -> Void) -> Void {
         guard vehicles.count < 20 else {
@@ -47,7 +47,7 @@ struct Parking {
             result += Int(ceil(Double(extras) / 15.0)) * 5
         }
         if hasDiscountCard {
-            result = Int((Double(result) * 15) / 100)
+            result = result - Int((Double(result) * 15) / 100)
         }
         totals.vehiclesCount += 1
         totals.earnings += result
@@ -192,8 +192,10 @@ vehicles.forEach { vehicle in
 }
 
 //test ej 7
-alkeParking.checkoutVehicle("CC333QY", onSuccess: {number in print("Your fee is \(number). Come back soon")}, onError: {print("Sorry, the check-out failed")})
+alkeParking.checkoutVehicle("AA111CC", onSuccess: {number in print("Your fee is \(number). Come back soon")}, onError: {print("Sorry, the check-out failed")})
 
+
+alkeParking.checkoutVehicle("AA111QR", onSuccess: {number in print("Your fee is \(number). Come back soon")}, onError: {print("Sorry, the check-out failed")})
 alkeParking.getAdminData()
 
 alkeParking.listVehicles()
